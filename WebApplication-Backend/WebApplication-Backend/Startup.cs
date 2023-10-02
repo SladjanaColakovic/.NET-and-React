@@ -12,6 +12,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApplication_Backend.Model;
+using WebApplication_Backend.Repositories;
+using WebApplication_Backend.Services;
 
 namespace WebApplication_Backend
 {
@@ -33,6 +35,12 @@ namespace WebApplication_Backend
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApplication_Backend", Version = "v1" });
             });
+            services.AddControllersWithViews()
+                .AddNewtonsoftJson(options =>
+                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+);
+            services.AddScoped<UserRepositoryI, UserRepository>();
+            services.AddScoped<UserServiceI, UserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
