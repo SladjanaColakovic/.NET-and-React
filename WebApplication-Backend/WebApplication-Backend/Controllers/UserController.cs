@@ -29,6 +29,7 @@ namespace WebApplication_Backend.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult GetAll() {
             return Ok(userService.GetAll());
         }

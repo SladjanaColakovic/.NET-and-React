@@ -34,6 +34,7 @@ namespace WebApplication_Backend
         {
             services.AddDbContext<MyDbContext>(options => options.UseNpgsql(ConfigurationExtensions.GetConnectionString(Configuration, "webDB")));
             services.AddControllers();
+            services.AddCors();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApplication_Backend", Version = "v1" });
@@ -59,13 +60,19 @@ namespace WebApplication_Backend
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
+            app.UseCors(options => options
+                .WithOrigins("http://localhost:3000")
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+            );
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApplication_Backend v1"));
             }
-
+            
             app.UseRouting();
 
             app.UseAuthentication();
