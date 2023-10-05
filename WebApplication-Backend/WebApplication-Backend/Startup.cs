@@ -55,6 +55,8 @@ namespace WebApplication_Backend
 );
             services.AddScoped<UserRepositoryI, UserRepository>();
             services.AddScoped<UserServiceI, UserService>();
+            services.AddScoped<AddressRepositoryI, AddressRepository>();
+            services.AddScoped<AddressServiceI, AddressService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -39,6 +39,12 @@ namespace WebApplication_Backend.Controllers
             return Ok(userService.GetByUsername(username));
         }
 
+        [HttpPost("register")]
+        [AllowAnonymous]
+        public IActionResult Register(NewUserDTO newUser) {
+            return Ok(userService.addUser(newUser));
+        }
+
         [HttpPost("login")]
         [AllowAnonymous]
         public IActionResult Login(UserLoginDTO userLogin) {

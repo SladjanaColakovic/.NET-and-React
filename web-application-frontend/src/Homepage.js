@@ -1,25 +1,13 @@
-import { useEffect, useState } from "react";
+import useFetch from "./useFetch";
 
 const Homepage = () => {
 
-    const [users, setUsers] = useState(null);
-
-    useEffect(() => {
-        fetch('https://localhost:44319/api/User')
-            .then(res => {
-                return res.json();
-            })
-            .then(data => {
-                console.log(data)
-                setUsers(data);
-
-            });
-
-    }, []);
+    const {data: users, error} = useFetch('https://localhost:44319/api/User');
 
     return (
         <div className="home">
             <h1>Users</h1>
+            {error && <div>{error}</div>}
             {users &&
                 <table id="users">
                     <thead>

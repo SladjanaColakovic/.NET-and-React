@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApplication_Backend.DTOs;
 using WebApplication_Backend.Model;
 using WebApplication_Backend.Repositories;
 
@@ -11,10 +12,35 @@ namespace WebApplication_Backend.Services
     {
 
         private readonly UserRepositoryI userRepository;
+        private readonly AddressServiceI addressService;
 
-        public UserService(UserRepositoryI userRepository) {
+        public UserService(UserRepositoryI userRepository, AddressServiceI addressService) {
             this.userRepository = userRepository;
+            this.addressService = addressService;     
         }
+
+        public User addUser(NewUserDTO newUser)
+        {
+            Address address = new Address
+            {
+                Street = newUser.Street,
+                City = newUser.City,
+                Country = newUser.Country,
+            };
+            Address savedAddress = addressService.addAddress(address);
+            User user = new User { Name = newUser.Name,
+                    Surname = newUser.Surname,
+                    Username = newUser.Username,
+                    Password = newUser.Password,
+                    Email = newUser.Email,
+                    Role = newUser.Role,
+                    AddressId = savedAddress.Id,
+                    Address = savedAddress
+            
+            };
+            return userRepository.addUser(user);
+        }
+
         public List<User> GetAll()
         {
             return userRepository.GetAll();
