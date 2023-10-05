@@ -42,7 +42,7 @@ namespace WebApplication_Backend.Controllers
         [HttpPost("register")]
         [AllowAnonymous]
         public IActionResult Register(NewUserDTO newUser) {
-            return Ok(userService.addUser(newUser));
+            return Ok(userService.AddUser(newUser));
         }
 
         [HttpPost("login")]
@@ -96,6 +96,13 @@ namespace WebApplication_Backend.Controllers
             }
 
             return NotFound();
+        }
+
+        [HttpDelete("{id}")]
+        [AllowAnonymous]
+        public IActionResult Delete(long id) {
+            userService.Delete(id);
+            return Ok();
         }
 
         [HttpGet("admin")]

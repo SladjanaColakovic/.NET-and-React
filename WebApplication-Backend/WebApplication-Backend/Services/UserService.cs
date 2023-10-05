@@ -19,7 +19,7 @@ namespace WebApplication_Backend.Services
             this.addressService = addressService;     
         }
 
-        public User addUser(NewUserDTO newUser)
+        public User AddUser(NewUserDTO newUser)
         {
             Address address = new Address
             {
@@ -38,7 +38,12 @@ namespace WebApplication_Backend.Services
                     Address = savedAddress
             
             };
-            return userRepository.addUser(user);
+            return userRepository.AddUser(user);
+        }
+
+        public void Delete(long id)
+        {
+            userRepository.Delete(id);
         }
 
         public List<User> GetAll()

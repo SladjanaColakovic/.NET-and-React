@@ -4,6 +4,14 @@ const Homepage = () => {
 
     const {data: users, error} = useFetch('https://localhost:44319/api/User');
 
+    const handleDelete = (id) => {
+        fetch('https://localhost:44319/api/User/' + id, {
+            method: 'DELETE'
+        }).then(() => {
+            window.location.reload(true)
+        })
+    }
+
     return (
         <div className="home">
             <h1>Users</h1>
@@ -19,6 +27,7 @@ const Homepage = () => {
                             <th>Email</th>
                             <th>Role</th>
                             <th>Address</th>
+                            <th>&nbsp;</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -31,6 +40,7 @@ const Homepage = () => {
                                 <td>{user.email}</td>
                                 <td>{user.role}</td>
                                 <td>{user.address.street}, {user.address.city}, {user.address.country}</td>
+                                <td><button onClick={() => {handleDelete(user.id)}} className="delete-btn">Obrisi</button></td>
                             </tr>
                         ))}
                     </tbody>

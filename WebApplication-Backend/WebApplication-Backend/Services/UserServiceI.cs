@@ -11,6 +11,8 @@ namespace WebApplication_Backend.Services
     {
         public List<User> GetAll();
         public User GetByUsername(string username);
-        public User addUser(NewUserDTO newUser);
+        public User AddUser(NewUserDTO newUser);
+
+        public void Delete(long id);
     }
 }

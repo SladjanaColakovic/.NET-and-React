@@ -12,7 +12,9 @@ namespace WebApplication_Backend.Repositories
         public List<User> GetAll();
         public User GetByUsername(string username);
 
-        public User addUser(User newUser);
+        public User AddUser(User newUser);
+
+        public void Delete(long id);
 
 
     }

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useHistory } from 'react-router-dom'
 
 
-const Newuser = () => {
+const NewUser = () => {
     const [name, setName] = useState('');
     const [surname, setSurname] = useState('');
     const [email, setEmail] = useState('');
@@ -16,8 +16,6 @@ const Newuser = () => {
     const history = useHistory();
 
     const handleClick = () => {
-
-        console.log("Ok")
         let data = {
             name: name,
             surname: surname,
@@ -83,4 +81,4 @@ const Newuser = () => {
     );
 }
 
-export default Newuser;
+export default NewUser;

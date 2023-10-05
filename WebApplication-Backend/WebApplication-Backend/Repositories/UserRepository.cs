@@ -16,12 +16,19 @@ namespace WebApplication_Backend.Repositories
             this.context = context;
         }
 
-        public User addUser(User newUser)
+        public User AddUser(User newUser)
         {
              User user = context.Users.Add(newUser).Entity;
              context.SaveChanges();
              return user;
             
+        }
+
+        public void Delete(long id)
+        {
+            User user = context.Users.SingleOrDefault(u => u.Id == id);
+            context.Users.Remove(user);
+            context.SaveChanges();
         }
 
         public List<User> GetAll()
