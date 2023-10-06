@@ -1,8 +1,10 @@
 import useFetch from "./useFetch";
+import {useHistory} from 'react-router-dom';
 
 const Homepage = () => {
 
-    const {data: users, error} = useFetch('https://localhost:44319/api/User');
+    const [data, setData, error] = useFetch('https://localhost:44319/api/User');
+    const history = useHistory();
 
     const handleDelete = (id) => {
         fetch('https://localhost:44319/api/User/' + id, {
@@ -12,11 +14,15 @@ const Homepage = () => {
         })
     }
 
+    const showDetails = (id) => {
+        history.push('/users/' + id);
+    }
+
     return (
         <div className="home">
             <h1>Users</h1>
             {error && <div>{error}</div>}
-            {users &&
+            {data &&
                 <table id="users">
                     <thead>
                         <tr>
@@ -28,10 +34,11 @@ const Homepage = () => {
                             <th>Role</th>
                             <th>Address</th>
                             <th>&nbsp;</th>
+                            <th>&nbsp;</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {users.map((user) => (
+                        {data.map((user) => (
                             <tr key={user.id}>
                                 <td>{user.id}</td>
                                 <td>{user.name}</td>
@@ -41,6 +48,7 @@ const Homepage = () => {
                                 <td>{user.role}</td>
                                 <td>{user.address.street}, {user.address.city}, {user.address.country}</td>
                                 <td><button onClick={() => {handleDelete(user.id)}} className="delete-btn">Obrisi</button></td>
+                                <td><button onClick={() => {showDetails(user.id)}}>Detalji</button></td>
                             </tr>
                         ))}
                     </tbody>

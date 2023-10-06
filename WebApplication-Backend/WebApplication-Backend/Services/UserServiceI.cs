@@ -14,5 +14,7 @@ namespace WebApplication_Backend.Services
         public User AddUser(NewUserDTO newUser);
 
         public void Delete(long id);
+        public User GetById(long id);
+        public User EditUser(EditUserDTO editUser);
     }
 }

@@ -31,9 +31,28 @@ namespace WebApplication_Backend.Repositories
             context.SaveChanges();
         }
 
+        public User EditUser(EditUserDTO editUser)
+        {
+            User result = context.Users.Include(u => u.Address).FirstOrDefault(u => u.Id == editUser.Id);
+            result.Name = editUser.Name;
+            result.Surname = editUser.Surname;
+            result.Email = editUser.Email;
+            result.Username = editUser.Username;
+            result.Role = editUser.Role;
+            result.Password = editUser.Password;
+            context.SaveChanges();
+            return result;
+
+        }
+
         public List<User> GetAll()
         {
             return context.Users.Include(u => u.Address).ToList();
+        }
+
+        public User GetById(long id)
+        {
+            return context.Users.Include(u => u.Address).FirstOrDefault(u => u.Id == id);
         }
 
         public User GetByUsername(string username)

@@ -46,9 +46,19 @@ namespace WebApplication_Backend.Services
             userRepository.Delete(id);
         }
 
+        public User EditUser(EditUserDTO editUser)
+        {
+            return userRepository.EditUser(editUser);
+        }
+
         public List<User> GetAll()
         {
             return userRepository.GetAll();
+        }
+
+        public User GetById(long id)
+        {
+            return userRepository.GetById(id);
         }
 
         public User GetByUsername(string username)

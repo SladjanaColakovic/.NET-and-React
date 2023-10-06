@@ -105,6 +105,18 @@ namespace WebApplication_Backend.Controllers
             return Ok();
         }
 
+        [HttpGet("one/{id}")]
+        [AllowAnonymous]
+        public IActionResult GetById(long id) {
+            return Ok(userService.GetById(id));
+        }
+
+        [HttpPut]
+        [AllowAnonymous]
+        public IActionResult EditUser(EditUserDTO editUser) {
+            return Ok(userService.EditUser(editUser));
+        }
+
         [HttpGet("admin")]
         [Authorize(Roles = "Admin")]
         public IActionResult AdminFunc() {

@@ -3,6 +3,7 @@ import Navbar from './Navbar';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Homepage from './Homepage';
 import NewUser from './NewUser';
+import UserDetails from './UserDetails';
 
 function App() {
   return (
@@ -18,6 +19,9 @@ function App() {
             </Route>
             <Route path = "/new">
               <NewUser></NewUser>
+            </Route>
+            <Route path = "/users/:id">
+              <UserDetails></UserDetails>
             </Route>
           </Switch>
         </div>

@@ -15,6 +15,8 @@ namespace WebApplication_Backend.Repositories
         public User AddUser(User newUser);
 
         public void Delete(long id);
+        public User GetById(long id);
+        public User EditUser(EditUserDTO editUser);
 
 
     }

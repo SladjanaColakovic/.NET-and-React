@@ -22,7 +22,7 @@ const useFetch = (url) => {
             })
     }, [url])
 
-    return {data, error};
+    return [data, setData, error];
 }
 
 export default useFetch;
